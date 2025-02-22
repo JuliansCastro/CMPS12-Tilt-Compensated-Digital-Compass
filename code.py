@@ -1,3 +1,8 @@
+# Raspberry Pi Pico W - CMPS12 tilt-compensated digital compass.
+# Description: This code reads the data from the CMPS12 and prints it to the serial monitor.
+# Author: github.com/JuliansCastro
+# License: MIT
+
 # import time
 import board
 import busio
@@ -15,7 +20,7 @@ sda_pin = board.GP14 # GP0
 i2c_bus = busio.I2C(scl_pin, sda_pin)
 
 # Select the sensor type; use CMPS12 or CMPS14 depending on the one you have
-sensor = CMPS12(i2c_bus)  # Or use CMPS14(i2c_bus) if you are using the CMPS14
+sensor  = CMPS12(i2c_bus)  # Or use CMPS14(i2c_bus) if you are using the CMPS14
 
 # Initialize the sensor
 if not sensor.begin():
@@ -29,10 +34,10 @@ cal_stat = sensor.get_cal_stat() # Is calibrate if value is 1
 # Store and delete calibration
 if cal_stat == 1:
     sensor.store_cal()
-    # print("Almacenando calibración...")
+    # print("Saving Calibration...")
 sleep(1)
 
-# print("Borrando calibración...")
+# print("Clearing calibration...")
 # sensor.erase_cal()
 # time.sleep(1)
 
@@ -41,10 +46,10 @@ def main():
     start = monotonic()  # Capture current time
     while True:
         # Calibration status
-        cal_stat = sensor.get_cal_stat() # Is calibrate if value is 1
-        bearing = sensor.get_bearing_360()  # Drift angle (heading, yaw)
-        pitch   = sensor.get_pitch_180()    # Inclination angle (cabeceo, pitch)
-        roll    = sensor.get_roll_90()         # Heel angle (alabeo, roll)
+        cal_stat = sensor.get_cal_stat()        # Is calibrate if value is 1
+        bearing  = sensor.get_bearing_360()     # Drift angle (heading, yaw)
+        pitch    = sensor.get_pitch_180()       # Inclination angle (cabeceo, pitch)
+        roll     = sensor.get_roll_90()         # Heel angle (alabeo, roll)
         
         # Bearing bosch BNO055
         bearing_bosch = sensor.get_bearing_bosch_BNO055()
@@ -60,8 +65,8 @@ def main():
         # print(f"Bearing Bosch: {bearing_bosch}°\t Cal stat: {cal_stat}")
         sleep(0.1)
         
-        led.value = (time_elapsed % 5 == 0)
+        led.value = (time_elapsed % 5 == 0) # Blink the LED every 5 seconds
 
-    
-if __name__ == "__main__":
-    main()
+
+# Run the main loop
+main()
