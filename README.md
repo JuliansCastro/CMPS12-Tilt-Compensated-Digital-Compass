@@ -24,7 +24,7 @@ This is a CircuitPython library for interacting with the **[CMPS12](https://www.
    - Download the library from the [Adafruit bundle](https://circuitpython.org/libraries) and copy `adafruit_bus_device/` into `lib/`.
 
 4. **Main code file**
-    - Copy or replace the `code.py` file into the `CIRCUITPY` or  `root` folder on your CircuitPython board.
+    - Copy or replace the `code.py` file into the `/CIRCUITPY` or  `root` folder on your CircuitPython board.
 
 ## Usage
 
