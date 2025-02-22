@@ -1,3 +1,9 @@
+# Raspberry Pi Pico W - CMPS12 tilt-compensated digital compass.
+# Description: This code reads the data from the CMPS12 and prints it to the serial monitor.
+# Author: github.com/JuliansCastro
+# License: MIT
+
+
 import time
 from adafruit_bus_device.i2c_device import I2CDevice
 
